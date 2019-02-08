@@ -71,5 +71,28 @@ We use the the original VGG-19 model. You can find the download script at [Neura
 # Acknowledgement
 * This work is inspired and closely related to the paper: [A Neural Algorithm of Artistic Style](http://arxiv.org/abs/1508.06576) by Leon A. Gatys, Alexander S. Ecker, and Matthias Bethge. The key difference between their method and our method is the different "style" constraints: While Gatys et al used a global constraint for non-photorealistic synthesis, we use a local constraint which works for both non-photorealistic and photorealistic synthesis. See our paper for more details.
 * Our implementation is based on Justin Johnson's implementation of [Neural Style](https://github.com/jcjohnson/neural-style).   
+# Other resources (added)
+1. [中文论文笔记](https://blog.csdn.net/wangxc_123/article/details/76096082)
+2. [其他解读](https://zhuanlan.zhihu.com/p/36256766)
+把原来loss function中定义在Gram矩阵上的style loss改成了基于马尔科夫场的一项误差。
+
+3. [基于MRF和CNN的图像生成](https://blog.csdn.net/stdcoutzyx/article/details/54173846)
+MRF算法，全程马尔科夫随机场，所谓的马尔科夫特性，就是当前变量的值只和距离最近的变量有关系。
+论文将MRF和CNN结合起来，把[2]的Gram矩阵用MRF Loss进行了替代。即能利用CNN抽象特征的提取能力，又能利用MRF的空间布局限制，提高了生成图像的质量。
+- 实现上：
+MRF Loss是由各个patch的损失值加起来的。
+而每个patch的损失值则是该patch A与在风格图像中的最接近A的patch的欧式距离，该损失是基于feature_map的
+
+- basic设置
+19层的VGG Net
+x随机初始化
+MRF Loss使用relu3_1和relu4_1
+内容损失使用relu4_2
 
 
+4. [马尔科夫随机场MRF](https://blog.csdn.net/qiudw/article/details/8087636)
+通过MAP inference来确定图中每个节点的label。（最大似然估计（MLE）、最大后验概率估计（MAP））
+MRF相比其他方法的优势是：
+1）提供了一种principled method来对Prior knowledge建模；
+2）MRF可以很容易用定量的方法描述contextual information。
+因此，相比其它pixel-based，或local-based 方法，它可以考虑到环境知识的影响，如果建立的图模型得当，进而可能获得全局最优解释，这样正是向human vision更靠近了一步。
