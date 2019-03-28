@@ -96,3 +96,7 @@ MRF相比其他方法的优势是：
 1）提供了一种principled method来对Prior knowledge建模；
 2）MRF可以很容易用定量的方法描述contextual information。
 因此，相比其它pixel-based，或local-based 方法，它可以考虑到环境知识的影响，如果建立的图模型得当，进而可能获得全局最优解释，这样正是向human vision更靠近了一步。
+
+[2](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf) Gram Matrix: 用来计算feature correlation的。
+G_i_j is the inner product betweenthe vectorised feature maps i and j in layer l. 
+This is done by using gradient descent from a white noise image to minimise the **mean-squared distance** between the entries of the **Gram matrices** from the *original image* and the Gram matrices of the *image to be generated* [10, 25])
